@@ -83,7 +83,20 @@ function lihatData(id) {
  
  
 function simpanData() {
- 
+
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan baru berhasil disimpan"
+        }]).then(function() {
+            alert('Catatan Tersimpan');
+        }).catch(function(error) {
+            alert('Aduh kok error ya...');
+        });
+    }
+
     nama = $('#nama').val();
     tanggal = $('#tanggal').val();
     agenda = $('#agenda').val();
@@ -109,6 +122,19 @@ function simpanData() {
  
 function simpanEditData() {
  
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan yang diedit sudah tersimpan"
+        }]).then(function() {
+            alert('Catatan tersimpan');
+        }).catch(function(error) {
+            alert('Aduh kok error ya...');
+        });
+    }
+
     id_data = $('#eid_data').val();
     nama = $('#enama').val();
     tanggal = $('#etanggal').val();
@@ -124,6 +150,19 @@ function simpanEditData() {
  
 function hapusData(id) {
  
+     if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan sudah terhapus"
+        }]).then(function() {
+            alert('Catatan sudah dihapus');
+        }).catch(function(error) {
+            alert('Aduh kok nggak bisa');
+        });
+    }
+    
     if (localStorage.list_data && localStorage.id_data) {
         list_data = JSON.parse(localStorage.getItem('list_data'));
  
@@ -164,102 +203,5 @@ function gantiMenu(menu) {
         $('#edit-data').hide();
         $('#tambah-catatan').hide();
         $('#list-catatan').hide();
-    }
-}
-
-function simpanData() {
- 
-    if (!liff.isInClient()) {
-        sendAlertIfNotInClient();
-    } else {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': "Catatan baru berhasil disimpan"
-        }]).then(function() {
-            alert('Catatan Tersimpan');
-        }).catch(function(error) {
-            alert('Aduh kok error ya...');
-        });
-    }
- 
-    nama = $('#nama').val();
-    tanggal = $('#tanggal').val();
-    agenda = $('#agenda').val();
- 
-    if (localStorage.list_data && localStorage.id_data) {
-        list_data = JSON.parse(localStorage.getItem('list_data'));
-        id_data = parseInt(localStorage.getItem('id_data'));
-    }
-    else {
-        list_data = [];
-        id_data = 0;
-    }
- 
-    id_data++;
-    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
-    localStorage.setItem('list_data', JSON.stringify(list_data));
-    localStorage.setItem('id_data', id_data);
-    document.getElementById('form-data').reset();
-    gantiMenu('list-catatan');
- 
-    return false;
-}
- 
-function simpanEditData() {
- 
-    if (!liff.isInClient()) {
-        sendAlertIfNotInClient();
-    } else {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': "Catatan yang diedit sudah tersimpan"
-        }]).then(function() {
-            alert('Catatan tersimpan');
-        }).catch(function(error) {
-            alert('Aduh kok error ya...');
-        });
-    }
- 
-    id_data = $('#eid_data').val();
-    nama = $('#enama').val();
-    tanggal = $('#etanggal').val();
-    agenda = $('#eagenda').val();
- 
-    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
-    localStorage.setItem('list_data', JSON.stringify(list_data));
-    document.getElementById('eform-data').reset();
-    gantiMenu('list-catatan');
- 
-    return false;
-}
- 
-function hapusData(id) {
- 
-    if (!liff.isInClient()) {
-        sendAlertIfNotInClient();
-    } else {
-        liff.sendMessages([{
-            'type': 'text',
-            'text': "Catatan sudah terhapus"
-        }]).then(function() {
-            alert('Catatan sudah dihapus');
-        }).catch(function(error) {
-            alert('Aduh kok nggak bisa');
-        });
-    }
- 
-    if (localStorage.list_data && localStorage.id_data) {
-        list_data = JSON.parse(localStorage.getItem('list_data'));
- 
-        idx_data = 0;
-        for (i in list_data) {
-            if (list_data[i].id_data == id) {
-                list_data.splice(idx_data, 1);
-            }
-            idx_data++;
-        }
- 
-        localStorage.setItem('list_data', JSON.stringify(list_data));
-        loadCatatan();
     }
 }
