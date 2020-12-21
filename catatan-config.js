@@ -81,6 +81,66 @@ function lihatData(id) {
     }
 }
  
+ 
+function simpanData() {
+ 
+    nama = $('#nama').val();
+    tanggal = $('#tanggal').val();
+    agenda = $('#agenda').val();
+ 
+    if (localStorage.list_data && localStorage.id_data) {
+        list_data = JSON.parse(localStorage.getItem('list_data'));
+        id_data = parseInt(localStorage.getItem('id_data'));
+    }
+    else {
+        list_data = [];
+        id_data = 0;
+    }
+ 
+    id_data++;
+    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
+    localStorage.setItem('list_data', JSON.stringify(list_data));
+    localStorage.setItem('id_data', id_data);
+    document.getElementById('form-data').reset();
+    gantiMenu('list-catatan');
+ 
+    return false;
+}
+ 
+function simpanEditData() {
+ 
+    id_data = $('#eid_data').val();
+    nama = $('#enama').val();
+    tanggal = $('#etanggal').val();
+    agenda = $('#eagenda').val();
+ 
+    list_data.push({ 'id_data': id_data, 'nama': nama, 'tanggal': tanggal, 'agenda': agenda });
+    localStorage.setItem('list_data', JSON.stringify(list_data));
+    document.getElementById('eform-data').reset();
+    gantiMenu('list-catatan');
+ 
+    return false;
+}
+ 
+function hapusData(id) {
+ 
+    if (localStorage.list_data && localStorage.id_data) {
+        list_data = JSON.parse(localStorage.getItem('list_data'));
+ 
+        idx_data = 0;
+        for (i in list_data) {
+            if (list_data[i].id_data == id) {
+                list_data.splice(idx_data, 1);
+            }
+            idx_data++;
+        }
+ 
+        localStorage.setItem('list_data', JSON.stringify(list_data));
+        loadCatatan();
+    }
+}
+ 
+ 
 function gantiMenu(menu) {
     if (menu == "list-catatan") {
         loadCatatan();
