@@ -1,6 +1,6 @@
 window.onload = function() {
     const useNodeJS = false;   // if you are not using a node server, set this value to false
-    const defaultLiffId = "1655326343-goLjMXaK";   // change the default LIFF value if you are not using a node server
+    const defaultLiffId = "1655324788-jXlk5dpg";   // change the default LIFF value if you are not using a node server
  
     // DO NOT CHANGE THIS
     let myLiffId = "";
@@ -98,7 +98,7 @@ function displayIsInClientInfo() {
 function registerButtonHandlers() {
     document.getElementById('openWindowButton').addEventListener('click', function() {
         liff.openWindow({
-            url: 'https://catatanlineliffv2.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
+            url: 'https://catatanliffpep.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
             external: true
         });
     });
