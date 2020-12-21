@@ -1,199 +1,188 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Pesan Makan</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div class="container mb-4 px-4">
-      <!-- bagian profil -->
-      <div
-        class="row container-profil position-relative justify-content-center"
-      >
-        <div class="row" id="bg-profil"></div>
-        <div class="d-flex" id="profil"></div>
-      </div>
-
-      <!-- bagian makanan -->
-      <p class="row jenis">
-        Makanan
-        <ion-icon name="pizza-outline"></ion-icon>
-      </p>
-      <div class="row box-makanan mb-2">
-        <div class="keterangan">
-          <p class="nama-makanan">Burger Kampung Beef</p>
-          <small class="deskripsi">Roti + Telur + Daging Sapi + Sayur</small>
-          <p class="harga text">25.000</p>
+<!DOCTYPE HTML>
+<html>
+ 
+<head>
+    <title>Catatan Harianku</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+ 
+    <style>
+        .table>thead>tr>th {
+            padding: 60px;
+        }
+    </style>
+ 
+ 
+</head>
+ 
+<body onload="loadCatatan();">
+ 
+    <div class="col-xs-12 col-md-8 col-md-offset-2" ng-controller="listContactCtrl">
+        <div class="page-header">
+            <h1 align="center">
+                Catatan Harianku
+            </h1>
+            <ul class="nav nav-pills">
+                <li><a id="nav-list-catatan" href="javascript:void(0);" onclick="gantiMenu('list-catatan');">List Catatan</a></li>
+                <li><a id="nav-tambah-catatan" href="javascript:void(0);" onclick="gantiMenu('tambah-catatan');">Tambah Catatan</a></li>
+            </ul>
+ 
         </div>
-        <div class="visual">
-          <img
-            src="https://mlrrylhwpejg.i.optimole.com/J80nZ28-Ycc-iAzP/w:auto/h:auto/q:90/https://grillongrillaction.com/wp-content/uploads/2020/06/bacon-brisket-burger.jpg"
-            alt="burger beef"
-            class="img-fluid img-jenis text-dark"
-          />
-          <div class="tombol">
-            <button class="btn btn-success tombol-tambah">Tambah</button>
-
-            <button
-              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-            >
-              &minus;
-            </button>
-            <span class="quantity text-dark d-none"></span>
-            <button
-              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-            >
-              &plus;
-            </button>
-          </div>
+        <div id="tambah-catatan" class="well" style="display:none;">
+            <form id="form-data">
+                <div id="nama-group" class="form-group">
+                    <label>Nama:</label>
+                    <input type="text" class="form-control" id="nama" name="nama">
+                </div>
+                <div id="tanggal-group" class="form-group">
+                    <label>Tanggal:</label>
+                    <input type="text" class="form-control" id="tanggal" name="tanggal">
+                </div>
+                <div id="agenda-group" class="form-group">
+                    <label>Agenda:</label>
+                    <textarea class="form-control" id="agenda" name="agenda"></textarea><br />
+                </div>
+                <input type="button" value="Simpan" onclick="simpanData();" class="btn btn-success btn-small" />
+                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
+            </form>
         </div>
-      </div>
-      <div class="row box-makanan">
-        <div class="keterangan">
-          <p class="nama-makanan">Potato Chrunch</p>
-          <small class="deskripsi">Kentang + Mayones + Saus</small>
-          <p class="harga text">23.000</p>
+ 
+        <div id="edit-data" class="well" style="display:none;">
+            <form id="eform-data">
+ 
+                <div id="nama-group" class="form-group" style="display:none;">
+                    <label>id data:</label>
+                    <input type="text" class="form-control" id="eid_data" name="nama">
+                </div>
+ 
+                <div id="nama-group" class="form-group">
+                    <label>Nama:</label>
+                    <input type="text" class="form-control" id="enama" name="nama">
+                </div>
+                <div id="tanggal-group" class="form-group">
+                    <label>Tanggal:</label>
+                    <input type="text" class="form-control" id="etanggal" name="tanggal">
+                </div>
+                <div id="agenda-group" class="form-group">
+                    <label>Agenda:</label>
+                    <textarea class="form-control" id="eagenda" name="agenda"></textarea><br />
+                </div>
+                <input type="button" value="Simpan" onclick="simpanEditData();" class="btn btn-success btn-small" />
+                <input type="reset" value="Reset" onclick="" class="btn btn-warning btn-small" />
+                <input type="button" value="Cancel" onclick="gantiMenu('list-catatan');"
+                    class="btn btn-warning btn-small" />
+            </form>
         </div>
-        <div class="visual">
-          <img
-            src="https://cdn0-production-images-kly.akamaized.net/oIN3wVed8tEnm39rmcJtHo7D0eA=/640x360/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/970871/original/021248500_1440846143-header_chiantilvpa_com.jpg"
-            alt=""
-            class="img-fluid img-jenis text-dark"
-          />
-          <div class="tombol">
-            <button class="btn btn-success tombol-tambah">Tambah</button>
-
-            <button
-              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-            >
-              &minus;
-            </button>
-            <span class="quantity text-dark d-none"></span>
-            <button
-              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-            >
-              &plus;
-            </button>
-          </div>
+ 
+        <div id="lihat-data" class="well" style="display:none;">
+            <form id="eform-data">
+ 
+                <div id="nama-group" class="form-group" style="display:none;">
+                    <label for="disabled">id data:</label>
+                    <input type="text" class="form-control" id="lid_data" name="nama" disabled>
+                </div>
+ 
+                <div id="nama-group" class="form-group">
+                    <label for="disabled">Nama:</label>
+                    <input type="text" class="form-control" id="lnama" name="nama" disabled>
+                </div>
+                <div id="tanggal-group" class="form-group">
+                    <label for="disabled">Tanggal:</label>
+                    <input type="text" class="form-control" id="ltanggal" name="tanggal" disabled>
+                </div>
+                <div id="agenda-group" class="form-group">
+                    <label for="disabled">Agenda:</label>
+                    <textarea class="form-control" id="lagenda" name="agenda" disabled></textarea>
+                </div>
+                <input type="button" value="Kembali" onclick="gantiMenu('list-catatan');"
+                    class="btn btn-warning btn-small" />
+            </form>
         </div>
-      </div>
-
-      <button
-        class="btn rounded btn-info rounded-circle d-none"
-        id="tombol-browser"
-      >
-        <ion-icon name="open-outline"></ion-icon>
-      </button>
-
-      <!-- bagian minuman -->
-      <p class="row jenis">Minuman<ion-icon name="beer-outline"></ion-icon></p>
-      <div class="row box-makanan mb-2">
-        <div class="keterangan">
-          <p class="nama-makanan">Milkshake</p>
-          <small class="deskripsi">Soda + es + Susu</small>
-          <p class="harga text">17.900</p>
+ 
+ 
+        <div id="list-catatan" class="well">
+            Pilih List Catatan untuk melihat catatan yang sudah dibuat.
         </div>
-        <div class="visual">
-          <img
-            src="https://i2.wp.com/www.eatthis.com/wp-content/uploads/2020/01/how-to-make-a-milkshake-5.jpg?fit=1200%2C879&ssl=1"
-            alt="milk soda"
-            class="img-fluid img-jenis text-dark"
-          />
-          <div class="tombol">
-            <button class="btn btn-success tombol-tambah">Tambah</button>
-
-            <button
-              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-            >
-              &minus;
-            </button>
-            <span class="quantity text-dark d-none"></span>
-            <button
-              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-            >
-              &plus;
-            </button>
-          </div>
+ 
+        <!--Konten LIFF v2-->
+ 
+        <div id="liffAppContent">
+            <!-- ACTION BUTTONS -->
+            <div class="buttonGroup">
+                <div class="buttonRow">
+                    <button id="openWindowButton" class="btn btn-success btn-small">Open External Window</button>
+                    <button id="closeWindowButton" class="btn btn-danger btn-small">Close LIFF App</button>
+                    <button id="sendMessageButton" class="btn btn-warning btn-small">Send Message</button>
+                </div>
+ 
+            </div>
+ 
+            <!-- LIFF DATA -->
+            <div id="liffData">
+                <h3 id="liffDataHeader" class="textLeft">Informasi:</h3>
+                <table>
+                    <tr>
+                        <th>isInClient : </th>
+                        <td id="isInClient" class="textLeft"></td>
+                    </tr>
+                    <tr>
+                        <th>isLoggedIn : </th>
+                        <td id="isLoggedIn" class="textLeft"></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- LOGIN LOGOUT BUTTONS -->
+            <div class="buttonGroup">
+                <button id="liffLoginButton" class="btn btn-success btn-small">Log in</button>
+                <button id="liffLogoutButton" class="btn btn-warning btn-small">Log out</button>
+            </div>
+            <div id="statusMessage">
+                <div id="isInClientMessage"></div>
+                <div id="apiReferenceMessage">
+                    <p>Available LIFF methods vary depending on the browser you use to open the LIFF app.</p>
+                    <p>Please refer to the <a
+                            href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">API reference
+                            page</a> for more information.</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row box-makanan">
-        <div class="keterangan">
-          <p class="nama-makanan">Ice Cream and Hot Chocolate Powder</p>
-          <small class="deskripsi">Ice Cream + Coklat </small>
-          <p class="harga text">22.500</p>
+        <!-- LIFF ID ERROR -->
+        <div id="liffIdErrorMessage" class="hidden">
+            <p>You have not assigned any value for LIFF ID.</p>
+            <p>If you are running the app using Node.js, please set the LIFF ID as an environment variable in your
+                Heroku account follwing the below steps: </p>
+            <code id="code-block">
+                <ol>
+                    <li>Go to `Dashboard` in your Heroku account.</li>
+                    <li>Click on the app you just created.</li>
+                    <li>Click on `Settings` and toggle `Reveal Config Vars`.</li>
+                    <li>Set `MY_LIFF_ID` as the key and the LIFF ID as the value.</li>
+                    <li>Your app should be up and running. Enter the URL of your app in a web browser.</li>
+                </ol>
+            </code>
+            <p>If you are using any other platform, please add your LIFF ID in the <code>index.html</code> file.</p>
+            <p>For more information about how to add your LIFF ID, see <a
+                    href="https://developers.line.biz/en/reference/liff/#initialize-liff-app">Initializing the LIFF
+                    app</a>.</p>
         </div>
-        <div class="visual">
-          <img
-            src="https://www.melskitchencafe.com/wp-content/uploads/frozen-hot-chocolate3.jpg"
-            alt="ice chocolate"
-            class="img-fluid img-jenis text-dark"
-          />
-          <div class="tombol">
-            <button class="btn btn-success tombol-tambah">Tambah</button>
-
-            <button
-              class="tombol-dec font-weight-bolder text-light rounded-circle d-none"
-            >
-              &minus;
-            </button>
-            <span class="quantity text-dark d-none"></span>
-            <button
-              class="tombol-inc font-weight-bolder text-light rounded-circle d-none"
-            >
-              &plus;
-            </button>
-          </div>
+        <!-- LIFF INIT ERROR -->
+        <div id="liffInitErrorMessage" class="hidden">
+            <p>Something went wrong with LIFF initialization.</p>
+            <p>LIFF initialization can fail if a user clicks "Cancel" on the "Grant permission" screen, or if an error occurs in the process of <code>liff.init()</code>.
         </div>
-      </div>
-
-      <button
-        class="btn rounded btn-success d-none rounded-circle"
-        id="tombol-browser"
-      >
-        <ion-icon name="open-outline"></ion-icon>
-      </button>
+        <!-- NODE.JS LIFF ID ERROR -->
+        <div id="nodeLiffIdErrorMessage" class="hidden">
+            <p>Unable to receive the LIFF ID as an environment variable.</p>
+        </div>
+        
     </div>
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"
-    ></script>
-
-    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-    <script src="pesan-makanan.js"></script>
-    <script src="liff.js"></script>
-  </body>
+</body>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<script src="catatan-config.js"></script>
+<script src="liff-starter.js"></script>
+ 
 </html>

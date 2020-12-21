@@ -1,476 +1,57 @@
-* {
-  user-select: none;
+html {
+    font-size: 11px;
 }
-.jenis {
-  font-size: 3rem;
-  font-weight: 700;
-  border-bottom: #e7e8e9 dotted 2px;
-  text-indent: -0.06em;
-  color: #28a745;
-}
-
-.jenis ion-icon {
-  margin: auto 0;
-}
-
-body > .container {
-  padding-bottom: 5em;
-}
-
-.box-makanan {
-  border-bottom: #e7e8e9 solid 1px;
-  margin-bottom: 1rem;
-  height: 9em;
-  cursor: pointer;
-  position: relative;
-  font-size: 2vmin;
-  overflow: hidden;
-}
-
-.keterangan {
-  width: 80%;
-  padding-left: 0.4em;
-
-  transition: box-shadow 200ms ease-in;
-}
-
-.nama-makanan {
-  font-size: 1.5em;
-  margin: 0;
-  font-weight: 500;
-}
-
-.deskripsi {
-  font-size: 1em;
-  font-style: italic;
-  color: #acacac;
-}
-
-.harga {
-  margin-top: 1em;
-  font-size: 1.4em;
-}
-
-.visual {
-  width: 20%;
-  position: relative;
-}
-
-.img-jenis {
-  height: 6em;
-  width: 7em;
-  position: absolute;
-  right: 0;
-  border-radius: 4px;
-
-  cursor: pointer;
-}
-
-.tombol {
-  display: flex;
-  right: 0;
-  justify-content: space-between;
-  width: 7em;
-  position: absolute;
-  bottom: 0.25em;
-  margin: 0 auto;
-}
-
-.tombol-tambah {
-  width: 100%;
-  font-size: 1.1em;
-  height: 2em;
-  font-weight: bold;
-
-  padding: 0;
-  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-  border-radius: 4px;
-}
-
-.quantity {
-  text-align: center;
-  font-size: 1.1em;
-  height: 2em;
-  line-height: 2em;
-
-  font-weight: 500;
-}
-
-.tombol-inc,
-.tombol-dec {
-  font-size: 1.1em;
-  width: 2em;
-  height: 2em;
-  border: 0;
-  padding: 0;
-  margin: auto 0;
-  line-height: 2em;
-}
-
-#tombol-browser {
-  width: 2em;
-  height: 2em;
-  font-size: 2rem;
-  position: fixed;
-
-  line-height: 1.8em;
-
-  right: 0.8rem;
-  bottom: 1.5rem;
-}
-
-/* bagian profil */
-#bg-profil {
-  background: url("https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80")
-    no-repeat center;
-  background-size: cover;
-
-  filter: blur(5px);
-  display: block;
-  height: 15rem;
-  width: 100%;
-  padding: 0;
-}
-
-#profil {
-  position: absolute;
-  width: 100%;
-  height: 50%;
-  justify-content: start;
-
-  bottom: 0;
-}
-
-#img-profil {
-  width: 6rem;
-  height: 6rem;
-  border: 0.2rem solid #f8f9fa;
-
-  margin: auto 0;
-}
-
-#nama-profil {
-  color: #f8f9fa;
-  text-shadow: 1px 2px #343a40;
-  font-size: 1.6rem;
-  margin: auto 1rem;
-  font-weight: bold;
-  text-transform: uppercase;
-
-  width: 70%;
-  word-break: break-all;
-}
-
-/* bagian modal */
-#container-modal {
-  width: 100%;
-  height: 100%;
-  bottom: 0;
-  position: fixed;
-  transition: 100ms ease-out;
-
-  z-index: 9999;
-}
-
-#field-content {
-  height: 100%;
-  margin: 0 auto;
-  bottom: 0;
-  position: relative;
-  padding: 0;
-
-  display: flex;
-  justify-content: center;
-}
-
-#main-modal {
-  position: absolute;
-  border-top-right-radius: 1rem;
-  border-top-left-radius: 1rem;
-  bottom: 0;
-  margin: 0;
-  height: 90%;
-  width: 100%;
-  font-size: 4vmin;
-  padding: 0 5vmin;
-  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-
-  display: flex;
-  flex-direction: column;
-}
-
-#main-modal div {
-  overflow: hidden;
-}
-
-#main-modal > div:nth-of-type(1) {
-  height: 70%;
-  justify-content: space-between;
-  border-radius: 4px;
-}
-
-#main-modal > div:nth-of-type(2) {
-  height: 20%;
-  font-size: 2.5vmin;
-}
-
-#main-modal > div:nth-of-type(2) > div {
-  display: flex;
-  flex-direction: column;
-  height: 80%;
-
-  font-size: 2.8vmin;
-}
-
-#main-modal > div:nth-of-type(3) {
-  height: 10%;
-  display: flex;
-  flex-direction: column;
-
-  justify-content: space-around;
-}
-
-#main-modal hr {
-  height: 0.6vmax;
-  border: none;
-  background: #acacac93;
-  border-radius: 0.3em;
-  width: 9vmin;
-
-  cursor: pointer;
-}
-
-.modal-change-size {
-  height: 0 !important;
-}
-
-#main-modal img {
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  display: block;
-
-  border-radius: 4px;
-}
-
-#main-modal #judul {
-  font-weight: bolder;
-  font-size: 1.8em;
-  margin: 0;
-  word-wrap: break-word;
-  width: fit-content;
-}
-
-#main-modal #deskripsi {
-  font-size: 1.2em;
-  word-wrap: break-word;
-  width: fit-content;
-  color: #acacac;
-}
-
-#main-modal #harga {
-  font-size: 1.5em;
-  font-weight: 500;
-  margin: 0;
-
-  width: fit-content;
-  display: block;
-}
-
-#main-modal button {
-  width: 100%;
-  font-size: 1em;
-  font-weight: bold;
-  border-radius: 4px;
-  transition: 500ms cubic-bezier(0, 0.03, 0.32, 1.84);
-}
-
-/* bagian pesanan */
-#float-btn-pesanan {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-}
-
-#float-btn-pesanan > div > button {
-  font-size: 3.4vmin;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  border-radius: 4px;
-  margin: 0 auto 1.5rem auto;
-  transition: 500ms cubic-bezier(0.56, -0.84, 0.49, 1.56);
-}
-
-#float-btn-pesanan > div > button > p {
-  font-size: 1.2em;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  padding: 0.2em 0.5em;
-  justify-content: flex-end;
-}
-
-#float-btn-pesanan > div > button > p > span:nth-of-type(1) {
-  width: 35%;
-  text-align-last: left;
-}
-
-#float-btn-pesanan > div > button > p > span:nth-of-type(2) {
-  width: 65%;
-  text-align: right;
-}
-
-#float-btn-pesanan > div > button ion-icon {
-  margin: auto;
-  display: block;
-
-  font-size: 1.2em;
-}
-
-@media (max-width: 599px) {
-  body > .container {
-    padding-bottom: 3em;
-  }
-  .jenis {
-    font-size: 1.9em;
-  }
-
-  .box-makanan {
-    height: 10em;
-    font-size: 3vmin;
-  }
-
-  .keterangan {
-    width: 70%;
-  }
-
-  .nama-makanan {
-    font-size: 1.3em;
-  }
-
-  .deskripsi {
-    font-size: 1em;
-  }
-
-  .harga {
-    font-size: 1.3em;
-    margin-top: 0.5em;
-  }
-
-  .visual {
-    width: 30%;
-    position: relative;
-  }
-
-  .img-jenis {
-    width: 7.5em;
-    height: 6.5em;
-  }
-
-  .tombol {
-    width: 7.5em;
-    height: 1.3em;
-    margin: auto 0;
-    bottom: 1.5em;
-  }
-
-  .tombol-tambah {
-    font-size: 1.2em !important;
-    height: 2em;
-    padding: 0;
-  }
-
-  .quantity {
-    text-align: center;
-    line-height: 2em;
-    font-size: 1.2em;
-    height: 2em;
-  }
-
-  .tombol-inc,
-  .tombol-dec {
-    font-size: 1.2em;
-    height: 2em;
-
-    line-height: 1.6em;
-  }
-
-  #bg-profil {
-    height: 12rem;
-  }
-
-  .btn-click-animation {
-    width: 80%;
-    font-size: 0.7rem;
-  }
-
-  #tombol-browser {
-    width: 2em;
-    height: 2em;
-    font-size: 1.5rem;
-
-    line-height: 1.6em;
-    right: 0.05em;
-    bottom: 2em;
-  }
-
-  /* bagian profil */
-  #profil {
-    position: absolute;
+ 
+table {
     width: 100%;
-    height: 50%;
-    justify-content: start;
-
-    bottom: 0;
-  }
-
-  #img-profil {
-    width: 4rem;
-    height: 4rem;
-    border: 0.15rem solid #f8f9fa;
-  }
-
-  #nama-profil {
-    margin: auto 0.5rem;
-    margin-right: 0;
-
-    font-size: 1rem;
-  }
+    overflow-x: auto;
+    display: block;
 }
-
-button:focus,
-textarea:focus,
-input:focus,
-.btn:focus {
-  outline: none !important;
-  outline-offset: none !important;
-  box-shadow: none !important;
+ 
+div {
+    max-width: 100%;
+    text-align: center;
 }
-
-.effect {
-  background-color: #e7e8e9;
-  border-radius: 50%;
-  pointer-events: none;
-
-  position: absolute;
-
-  z-index: -1;
-  top: 0;
-  width: 20px;
-  height: 20px;
-
-  transform: scale(0);
-
-  animation: ripple 1.9s;
+ 
+th {
+    text-align: left;
 }
-
-@keyframes ripple {
-  100% {
-    transform: scale(550);
-    opacity: 0;
-  }
+ 
+img { 
+    max-width: 25%; 
+    height: auto; 
+}
+ 
+button {
+    margin: 4px;
+}
+ 
+#code-block {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+ 
+#statusMessage {
+    position: relative;
+    top: 40px;
+}
+ 
+.textLeft {
+    text-align: left;
+}
+ 
+.buttonGroup {
+    position: relative;
+    top: 20px;
+}
+ 
+.hidden {
+    display: none;
 }
