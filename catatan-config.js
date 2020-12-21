@@ -81,8 +81,46 @@ function lihatData(id) {
     }
 }
  
- 
+function gantiMenu(menu) {
+    if (menu == "list-catatan") {
+        loadCatatan();
+        $('#tambah-catatan').hide();
+        $('#list-catatan').fadeIn();
+        $('#edit-data').hide();
+        $('#lihat-data').hide();
+    }
+    else if (menu == "tambah-catatan") {
+        $('#tambah-catatan').fadeIn();
+        $('#list-catatan').hide();
+        $('#edit-data').hide();
+        $('#lihat-data').hide();
+    } else if (menu == "edit-data") {
+        $('#edit-data').fadeIn();
+        $('#tambah-catatan').hide();
+        $('#list-catatan').hide();
+        $('#lihat-data').hide();
+    } else if (menu == "lihat-data") {
+        $('#lihat-data').fadeIn();
+        $('#edit-data').hide();
+        $('#tambah-catatan').hide();
+        $('#list-catatan').hide();
+    }
+}
+
 function simpanData() {
+ 
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan baru berhasil disimpan"
+        }]).then(function() {
+            alert('Catatan Tersimpan');
+        }).catch(function(error) {
+            alert('Aduh kok error ya...');
+        });
+    }
  
     nama = $('#nama').val();
     tanggal = $('#tanggal').val();
@@ -109,6 +147,19 @@ function simpanData() {
  
 function simpanEditData() {
  
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan yang diedit sudah tersimpan"
+        }]).then(function() {
+            alert('Catatan tersimpan');
+        }).catch(function(error) {
+            alert('Aduh kok error ya...');
+        });
+    }
+ 
     id_data = $('#eid_data').val();
     nama = $('#enama').val();
     tanggal = $('#etanggal').val();
@@ -124,6 +175,19 @@ function simpanEditData() {
  
 function hapusData(id) {
  
+    if (!liff.isInClient()) {
+        sendAlertIfNotInClient();
+    } else {
+        liff.sendMessages([{
+            'type': 'text',
+            'text': "Catatan sudah terhapus"
+        }]).then(function() {
+            alert('Catatan sudah dihapus');
+        }).catch(function(error) {
+            alert('Aduh kok nggak bisa');
+        });
+    }
+ 
     if (localStorage.list_data && localStorage.id_data) {
         list_data = JSON.parse(localStorage.getItem('list_data'));
  
@@ -137,32 +201,5 @@ function hapusData(id) {
  
         localStorage.setItem('list_data', JSON.stringify(list_data));
         loadCatatan();
-    }
-}
- 
- 
-function gantiMenu(menu) {
-    if (menu == "list-catatan") {
-        loadCatatan();
-        $('#tambah-catatan').hide();
-        $('#list-catatan').fadeIn();
-        $('#edit-data').hide();
-        $('#lihat-data').hide();
-    }
-    else if (menu == "tambah-catatan") {
-        $('#tambah-catatan').fadeIn();
-        $('#list-catatan').hide();
-        $('#edit-data').hide();
-        $('#lihat-data').hide();
-    } else if (menu == "edit-data") {
-        $('#edit-data').fadeIn();
-        $('#tambah-catatan').hide();
-        $('#list-catatan').hide();
-        $('#lihat-data').hide();
-    } else if (menu == "lihat-data") {
-        $('#lihat-data').fadeIn();
-        $('#edit-data').hide();
-        $('#tambah-catatan').hide();
-        $('#list-catatan').hide();
     }
 }
