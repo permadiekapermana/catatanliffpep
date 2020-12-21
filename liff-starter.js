@@ -98,7 +98,7 @@ function displayIsInClientInfo() {
 function registerButtonHandlers() {
     document.getElementById('openWindowButton').addEventListener('click', function() {
         liff.openWindow({
-            url: 'https://liffpep.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
+            url: 'https://catatanliffpep.herokuapp.com/', // Isi dengan Endpoint URL aplikasi web Anda
             external: true
         });
     });
